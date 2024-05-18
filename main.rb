@@ -6,7 +6,7 @@
 =end
 
 def stock_picker(prices)
-
+# ensures there are enough numbers to calculate a solution
   if prices.length < 2
     return "Not enough data to calculate a solution"
   end
@@ -15,9 +15,13 @@ def stock_picker(prices)
   buy_at = 0
   sell_at = 0
 
+  #establishes the iteration for buy_at
   (0...prices.length).each do |i|
-    i+1...prices.length.each do |j|
+    #establishes the iteration for sell_at
+    (i+1...prices.length).each do |j|
+      #calculates profit for each potential combination of days
       profit = prices[j] - prices[i]
+      #ensures the max_profit calculation is captured to provide a correct result.
       if profit > max_profit
         max_profit = profit
         buy_at = i
@@ -26,9 +30,5 @@ def stock_picker(prices)
     end
   end
 
-  return(buy_day,sell_day)
+  return "buy at day #{buy_at}, sell at day #{sell_at}. "
 end
-
-price_list = [17,3,6,9,15,8,6,1,10]
-
-puts stock_picker(price_list)
